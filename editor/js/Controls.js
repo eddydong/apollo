@@ -121,7 +121,7 @@ var Controls= {};
 			
 			// i for improvising
 			if (e.keyCode==73) {
-				pianoroll.improvise();
+				pianoroll.improvise("preset");
 			};
 
 			// new note
