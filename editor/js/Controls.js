@@ -136,8 +136,9 @@ var Controls= {};
 			if (e.keyCode == 56) { pianoroll.setNewNote(Tone.Time("1n")*8); };
 								
 			if (e.keyCode == 84) { document.getElementById("btn_trisect").click(); };
+			if (e.keyCode == 66) { document.getElementById("btn_bisect").click(); };
+			if (e.keyCode == 77) { document.getElementById("btn_merge").click(); };
 
-			if (e.keyCode == 84) { document.getElementById("btn_trisect").click(); };
 			if (e.keyCode == 192) { document.getElementById("btn_dot").click(); };
 			
 			// switch among synth instruments
@@ -853,6 +854,14 @@ var Controls= {};
 	
 	document.getElementById("btn_trisect").onclick=()=>{
 		pianoroll.trisect();
+	}
+
+	document.getElementById("btn_bisect").onclick=()=>{
+		pianoroll.bisect();
+	}
+
+	document.getElementById("btn_merge").onclick=()=>{
+		pianoroll.merge();
 	}
 
 	document.getElementById("btn_x2").onclick=()=>{

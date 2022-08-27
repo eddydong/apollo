@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>motf pianoroll</title>
+    <link rel="stylesheet" type="text/css" href="./css/editor.css" />
+</head>
+
+<body>
+
+<div id="top-bar-group">
+
+<div class="tool-bar-global">
+	<label class="logo">motf.io</label>
+	<button id="btn_open" title="Command+O">Open</button>
+	<span>|</span>
+	<button id="btn_save" title="Command+S">Save</button>
+	<span>
+	Work Name:
+	<input id="input_workname" maxlength=22 type="text" style="width:180px;" value="Another Piece of Shit" />
+	.motf
+	</span>	
+	<span>|</span>
+	<button id="btn_new" title="Command+N">New</button>
+	<span>Key
+	<select id="select_key">
+		<option>C</option>
+		<option>C#/Db</option>
+		<option>D</option>
+		<option>D#/Eb</option>
+		<option>E</option>
+		<option>F</option>
+		<option>F#/Gb</option>
+		<option>G</option>
+		<option>G#/Ab</option>
+		<option>A</option>
+		<option>A#/Bb</option>
+		<option>B</option>
+	</select>
+	</span>
+	<span>Scale
+	<select id="select_scale">
+		<option>Major</option>
+		<option>Minor</option>
+		<option>Jazz</option>
+		<option>Chinese</option>
+		<option>Japanese</option>
+		<option>Arabic</option>
+		<option>Egyptian</option>
+		<option>Hungarian</option>
+		<option>Persian</option>
+		<option>Ukrainian</option>
+		<option>Neapolian</option>
+      	<option>Ionian</option>
+      	<option>Dorian</option>
+      	<option>Phrygian</option>
+      	<option>Lydian</option>
+      	<option>Mixolydian</option>
+      	<option>Aeolian</option>
+      	<option>Locrian</option>
+	</select>
+	</sapn>
+	<span>Time Sig.
+	<select id="select_bpMeas">
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>6</option>
+	</select>
+	</span>
+	<span>/
+	<select id="select_bpNote">
+		<option>4</option>
+		<option>8</option>
+	</select>
+	</span>
+	<span>|</span>
+	<button id="btn_cut" title="Command+X">Cut</button>
+	<button id="btn_copy" title="Command+C">Copy</button>
+	<button id="btn_paste" title="Command+V">Paste</button>
+	<button id="btn_paste" title="Command+V">Pst. Ins.</button>
+	<span>|</span>
+	<button >Del.</button>
+	<span>|</span>	
+	<button id="btn_select_all">Sel. All</button>	
+	<button id="btn_select_invert">Sel. Inv.</button>	
+	<span>|</span>	
+	<button id="btn_through">Through</button>		
+	<button id="btn_magnet">Magnet</button>	
+	<span>|</span>	
+	<button id="btn_undo" title="Command+Z">Undo</button>
+	<button id="btn_redo" title="Command+Snift+N">Redo</button>
+	<span>|</span>
+	<button id="btn_esc" title="Escape">Esc.</button>	
+</div>
+
+<div class="tool-bar-global">
+	<button id="btn_begin" title="Command+Left">Bgn</button>
+	<button id="btn_play" title="Space">Play/Pause</button>
+	<button id="btn_end" title="Command+Right">End</button>
+	<span>|</span>
+	<span>Global Volume
+	<input id="input_master_volume" value=-12 min=-30 max=0 step=0.3 type="range" />
+	</span>
+<!-- 
+	<span>Room Size
+	<input id="input_master_reverb" value=0 min=0 max=1 step=0.01 type="range" />
+	</span>
+ -->
+	<span>|</span>
+	<button id="btn_metronome" title="M">Metro.</button>
+	<span>Bpm
+		<input type="number" id="input_bpm" value=108 min=30 max=300/>
+	</span>
+	<span>|</span>
+	<button id="btn_tempo_automation" title="E">Gl. Tempo Auto.</button>
+	<span>
+	<span>|</span>	
+	<button id="btn_split">Humanize</button>		
+	<select id="select_draw_type" >
+		<option>Velocity</option>
+		<option>Tempo</option>
+	</select>
+	<span>|</span>		
+	<span>View
+	<button id="btn_fit_x">Fit X</button>	
+	<button id="btn_fit_y">Fit Y</button>	
+	<button id="btn_fit_xy">Fit XY</button>	
+	<button id="btn_fit_xy">Auto Zoom</button>	
+	</span>
+	<span>|</span>	
+	Composer
+	<button id="btn_rhythm_pannel">Rhythm</button>	
+	<button id="btn_suggester_pannel">Suggester</button>	
+	<button id="btn_improvise_pannel">Filter</button>
+	<span>|</span>	
+	<button id="btn_drum">Drum Machine</button>	
+</div>
+
+<div class="tool-bar-global">
+	<button id="btn_new_note">+Note</button>
+	<select id="select_new_note_length">
+		<option value="32n">1/32 n</option>
+		<option value="16n">1/16 n</option>
+		<option value="8n">1/8 n</option>
+		<option value="4n">1/4 n</option>
+		<option value="2n">1/2 n</option>
+		<option value="1n">1 n</option>
+	</select>
+	<button id="btn_x2" title="E">x2</button>
+	<button id="btn_/2" title="E">/2</button>
+	<button id="btn_dot">Dot</button>
+	<span>|</span>	
+	<button id="btn_trisect">Trisect</button>
+	<button id="btn_bisect">Bisect</button>
+	<button id="btn_merge">Merge</button>
+	<span>|</span>	
+	<button id="btn_slice">Slice By</button>
+	<select id="select_draw_type" >
+		<option>Rhythm</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>6</option>
+		<option>8</option>
+	</select>
+	<span>|</span>
+	<span>Canvas Tools
+	<button id="btn_skeleton">Skeleton</button>
+	<span>|</span>	
+	<button id="btn_mask_pen">Pen</button>
+	<button id="btn_split">Line</button>	
+	<span>Draw To
+	<select id="select_draw_type" >
+		<option>Keep</option>
+		<option>Erase</option>
+	</select>
+	</span>
+	<span>Line Width
+	<input id="input_pen_width" type="range" min=1 max=8 step=2 value=2 />
+	</span>	
+	</span>
+	<span>|</span>
+	<span>Drag Mode
+	<button id="btn_drag_0">Pan/Scroll</button>
+	<button id="btn_drag_1">Zoom</button>
+	<button id="btn_drag_2">Sel. Rect</button>
+	<button id="btn_drag_3">Sel. Span</button>
+	<button id="btn_drag_4">Sel. Meas</button>
+	</span>	
+</div>
+
+<div class="tool-bar-layer">
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_0_mute" >M</button>
+	<button class="solo" id="btn_layer_0_solo" >S</button>
+	<button class="layer" id="btn_layer_0">Melody 1</button>
+	</span>	 
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_1_mute" >M</button>
+	<button class="solo" id="btn_layer_1_solo" >S</button>
+	<button class="layer" id="btn_layer_1">Melody 2</button>
+	</span>	
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_2_mute" >M</button>
+	<button class="solo" id="btn_layer_2_solo" >S</button>
+	<button class="layer" id="btn_layer_2">Melody 3</button>
+	</span>	
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_3_mute" >M</button>
+	<button class="solo" id="btn_layer_3_solo" >S</button>
+	<button class="layer" id="btn_layer_3">Rythm 1</button>
+	</span>	
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_4_mute" >M</button>
+	<button class="solo" id="btn_layer_4_solo" >S</button>
+	<button class="layer" id="btn_layer_4">Rythm 2</button>
+	</span>	
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_5_mute" >M</button>
+	<button class="solo" id="btn_layer_5_solo" >S</button>
+	<button class="layer" id="btn_layer_5">Bass 1</button>
+	</span>	
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_6_mute" >M</button>
+	<button class="solo" id="btn_layer_6_solo" >S</button>
+	<button class="layer" id="btn_layer_6">Percussion 1</button>
+	</span>	
+	<span class="layer-group">
+	<button class="mute" id="btn_layer_7_mute" >M</button>
+	<button class="solo" id="btn_layer_7_solo" >S</button>
+	<button class="layer" id="btn_layer_7">Percussion 2</button>
+	</span>	
+</div>
+
+<div class="tool-bar-layer">
+	<span>Layer Name
+	<input id="input_layer_name" type="text" maxlength=10 value="noname" />
+	</span>
+	<span>|</span>	
+	<span>Instrument
+	<select id="select_instrument" >
+	  <optgroup label="Synthetic">
+		<option>Tiny</option>
+		<option>Kalimba</option>
+		<option>Pianoetta</option>
+		<option>Marimba</option>
+		<option>TreeTrunk</option>
+		<option>SteelPan</option>
+		<option>Pizz</option>
+		<option>SuperSaw</option>
+		<option>Lectric</option>
+		<option>Harmonics</option>
+		<option>TinySaw</option>
+		<option>E.Cello</option>
+		<option>B.Guitar</option>
+		<option>BrassCir.</option>
+		<option>CoolGuy</option>
+		<option>Bassy</option>
+	  </optgroup>
+	  <optgroup id="instrument_real" label="Real">
+		<option>! Piano</option>
+		<option>! Cello</option>
+		<option>! Violin</option>
+		<option>! Steel Guitar</option>
+		<option>! Nylon Guitar</option>
+		<option>! Trumpet</option>
+		<option>! Trombone</option>
+		<option>! Harp</option>
+		<option>! Electric Guitar</option>
+		<option>! Contrabass</option>
+		<option>! Flute</option>
+		<option>! French Horn</option>
+		<option>! Electric Bass</option>
+		<option>! Bassoon</option>
+	  </optgroup>
+	</select>
+	</span>
+	<span>|</span>	
+	<span>Volume
+	<input id="input_layer_volume" type="range" min=-30 max=0 step=1 value=-12 />
+	</span>
+	<button id="btn_velocity_automation" title="Velocity automation">Vel. Auto.</button>	
+	<span>|</span>	
+	<span>Pan
+	<input id="input_layer_pan" type="range" min=-1 max=1 step=0.1 value=0 />
+	</span>
+<!-- 
+	<button id="btn_studio_layout" title="Studio Layout">Studio Layout</button>	
+ -->
+	<span>|</span>	
+	<span>Verse Name
+	<input type="text" style="width:180px;" placeholder="New Verse" />
+	<input type="color" />
+	<button id="btn_improvise_pannel">Fold/Unfold</button>	
+	<button id="btn_improvise_pannel">Auto</button>	
+	</span>	
+</div>
+
+</div>
+
+<canvas id="canvas-nav"></canvas>
+<div style="clear: both;"></div>
+
+<canvas id="canvas-main"></canvas>
+<div style="clear: both;"></div>
+
+<div id="bottom-bar-group">
+<div class="tool-bar-global">
+	<button id="btn_imp_a">Vis.</button>
+	<button id="btn_auto_imp">Improv. w/ Auto.</button>
+	<span>|</span>
+	<span>Preset:
+	<button class="imp" id="btn_imp_0">Root Gen.</button>
+	<button class="imp" id="btn_imp_1">Bass Slow</button>
+	<button class="imp" id="btn_imp_2">Bass Fast</button>
+	<button class="imp" id="btn_imp_3">Rhythm 1</button>
+	<button class="imp" id="btn_imp_4">Rhythm 2</button>
+	<button class="imp" id="btn_imp_5">Melody 1</button>
+	<button class="imp" id="btn_imp_6">Melody 2</button>
+	<button class="imp" id="btn_imp_7">Melody 3</button>
+	<button class="imp" id="btn_imp_8">Arpeggio 1</button>
+	<button class="imp" id="btn_imp_9">Arpeggio 2</button>
+	</span>
+	<span>|</span>
+	<button id="btn_edit_preset">Edit</button>
+	<button id="btn_write_preset">Write</button>
+</div>
+<div class="tool-bar-global">
+	<span>iRhythm:
+	<input type="text" id="input_rhythm" placeholder="random" />
+<!-- 
+	<datalist id="rhythm_list">
+		<option>random</option>
+		<option>44</option>
+		<option>422</option>
+		<option>242</option>
+		<option>224</option>
+		<option>4211</option>
+		<option>4121</option>
+		<option>4112</option>
+		<option>4112</option>
+		<option>4112</option>
+		<option>4112</option>
+		<option>11111111</option>
+	</datalist>
+ -->
+	</span>	
+	<button id="btn_learn_rythm">Random</button>
+	<button id="btn_learn_rythm">Learn Fm. Sel.</button>
+	<span>|</span>	
+	<span>iSuggester:
+	<select id="select_suggester">
+		<option>Root+0: 0.50</option>
+		<option>Root+1: 0.50</option>
+		<option>Root-1: 0.50</option>
+		<option>Root+2: 0.50</option>
+		<option>Root-2: 0.50</option>
+		<option>Root+3: 0.50</option>
+		<option>Root-3: 0.50</option>
+		<option>Root+4: 0.50</option>
+		<option>Root-4: 0.50</option>
+		<option>Root+5: 0.50</option>
+		<option>Root-5: 0.50</option>
+		<option>Root+7: 0.50</option>
+		<option>Root-7: 0.50</option>
+	</select>
+	<input id="input_suggester_nob" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	<span>Complexity:
+	<label id="label_comp">4.5</label>
+	</span>
+	<button id="btn_learn_rythm">Learn Fm. Sel.</button>
+	</span>	
+	<span>|</span>	
+	<span>iParams:	
+	<button id="btn_learn_rythm">Learn Fm. Sel.</button>
+	</span>
+	<span>|</span>	
+	<button id="btn_apply_preset">Improv. w/ Preset</button>
+</div>
+<div class="tool-bar-global">
+	<label class="lab1">Max</label>
+	<span>|</span>		
+	<span><button id="btn_max_0" >Up & Down's</button>
+	<input id="input_max_0" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_max_1">Key Span</button>
+	<input id="input_max_1" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_max_2">Harmony</button>
+	<input id="input_max_2" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_max_3">Granularity</button>
+	<input id="input_max_3" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_max_4">Leading</button>
+	<input id="input_max_4" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_max_5">Self Ref.</button>
+	<input id="input_max_5" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+</div>
+<div class="tool-bar-global">
+	<label class="lab1">Min</label>
+	<span>|</span>		
+	<span><button id="btn_min_0" >Up & Down's</button>
+	<input id="input_min_0" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_min_1">Key Span</button>
+	<input id="input_min_1" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_min_2">Harmony</button>
+	<input id="input_min_2" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_min_3">Granularity</button>
+	<input id="input_min_3" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_min_4">Leading</button>
+	<input id="input_min_4" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+	<span>|</span>		
+	<span><button id="btn_min_5">Self Ref.</button>
+	<input id="input_min_5" class="nob1" type="range" min=0.0 max=1.00 step=0.05></input>
+	</span>
+</div>
+</div>
+<div style="clear: both;"></div>
+
+<div id="mask">
+<div class="center-text">LOADING...</div>
+</div>
+    
+</body>
+
+<!-- <script src="./js/pako.min.js"></script> -->
+<script src="./js/Tone.js"></script>
+<script src="./js/Mcommons.js"></script>
+<script src="./js/Global.js"></script>
+<script src="./js/Work.js"></script>
+<script src="./js/Composer.js"></script>
+<script src="./js/Pianoroll.js"></script>
+<script src="./js/Navbar.js"></script>
+<script src="./js/Instruments.js"></script>
+<script src="./js/Controls.js"></script>
+<script>pianoroll.init();
+
+// Compression:
+// let compressed_str = pako.gzip(str, {to: 'string'});
+// Decompression:
+// let original_str = pako.ungzip(compressed_str, { to: 'string' });
+// var compressed=zip("abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg");
+// console.log(compressed);
+// console.log(unzip(compressed));
+
+</script>

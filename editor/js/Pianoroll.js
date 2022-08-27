@@ -482,7 +482,7 @@ Pianoroll.prototype.trisect=function(){
 	this.addNote(x + Math.floor(n.len/3), {
 		note:n.note,
 		len:n.len/3,
-		offset:n.len/3-Math.floor(n.len/3),
+		offset:n.len/3-Math.floor(n.len/3)+ n.offset,
 		vel:n.vel,
 		sel:n.sel,
 		layer:n.layer
@@ -490,11 +490,59 @@ Pianoroll.prototype.trisect=function(){
 	this.addNote(x + Math.floor(n.len*2/3), {
 		note:n.note,
 		len:n.len/3,
-		offset:n.len*2/3-Math.floor(n.len*2/3),
+		offset:n.len*2/3-Math.floor(n.len*2/3)+ n.offset,
 		vel:n.vel,
 		sel:n.sel,
 		layer:n.layer
 	} ,"trisect")
+};
+
+Pianoroll.prototype.bisect=function(){
+	var r=this.selectedNotes();
+	if (r.length!=1) return;
+	var n=copyObj(r[0].n), x=r[0].x, y=r[0].y;
+	Work.global.seqIJ[x].notes[y].len = Work.global.seqIJ[x].notes[y].len / 2;
+	this.addNote(x + Math.floor(n.len/2), {
+		note:n.note,
+		len:n.len/2,
+		offset:n.len/2-Math.floor(n.len/2)+ n.offset,
+		vel:n.vel,
+		sel:n.sel,
+		layer:n.layer
+	} ,"bisect")
+};
+
+Pianoroll.prototype.merge=function(){
+	var r=this.selectedNotes();
+	
+	if (r.length<=1) return;
+	
+	var connectedSamekey=true;
+	var totalLen=0;
+	for (var i=0; i<r.length-1; i++) {
+		if (r[i].n.note!=r[i+1].n.note || Math.round(r[i].x+r[i].n.offset+r[i].n.len,6)!=Math.round(r[i+1].x+r[i+1].n.offset,6)) 
+			connectedSamekey=false;
+		totalLen+=r[i].n.len;
+	};
+	totalLen+=r[r.length-1].n.len;	
+	if (!connectedSamekey) return;
+	
+	var n=copyObj(r[0].n), x=r[0].x, y=r[0].y;
+	Work.global.seqIJ[x].notes[y].len = totalLen;
+	
+	this.deSelectAll();
+
+	for (var i=1; i<r.length; i++)
+		Work.global.seqIJ[r[i].x].notes[r[i].y].sel=1;
+	
+	for (var i=0; i<Work.global.seqIJ.length; i++) {
+		var s=[];
+		for (var j=0; j<Work.global.seqIJ[i].notes.length; j++)
+			if (Work.global.seqIJ[i].notes[j].sel===0) 
+				s.push(copyObj(Work.global.seqIJ[i].notes[j]));
+		Work.global.seqIJ[i].notes=s;
+	};
+	this.historyPush("merge");	
 };
 
 Pianoroll.prototype.drawPianoRoll=function(){
