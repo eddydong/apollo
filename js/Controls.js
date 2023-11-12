@@ -1375,7 +1375,7 @@ function showWaiting(){
 	document.getElementById("splash_text").style.display="block";
 
 		Tone.loaded().then(()=>{
-			console.log("all loaded");
+//			console.log("all loaded");
 			hideWaiting();	
 		});
 
@@ -1487,7 +1487,7 @@ function initFixedUI(){
 
 initFixedUI();
 init();
-await Tone.start();
+//Tone.start();
 
 Controls.init=init;
 Controls.showWaiting=showWaiting;
