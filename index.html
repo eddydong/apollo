@@ -557,6 +557,9 @@ localStorage.clear();
 
 //{"x":0,"y":3,"d":64,"v":1,"l":0,"s":1,"t":0}
 
+		if (Tone.context.state!="running") 
+			await Tone.start();
+
 pianoroll.init(); 
 var work = JSB.train;
 var rnd = Math.floor(Math.random()*work.length);
@@ -588,6 +591,7 @@ for (var i=0; i<piece.length; i++) {
 
 pianoroll.autoZoom("xy");
 
+	
 
 // const last = ['C4', 'E4', 'G4', 'B4'];
 // console.log(Tonal);
