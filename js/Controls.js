@@ -71,6 +71,9 @@ var Controls= {};
 	var isWritingPreset=0;
 
 	window.onkeydown=function(e){
+	
+		if (Tone.context.state!="running") 
+			await Tone.start();
 		
  		if (document.activeElement.id=="input_rhythm" ||
  			document.activeElement.id=="input_bpm" ||
