@@ -277,7 +277,6 @@ var Controls= {};
 					
 			// Enter for PLAY
 			if (e.keyCode==13){
-				await Tone.start();
 				if (pianoroll.isPlaying) document.getElementById("btn_stop").onclick();
 				else document.getElementById("btn_play").onclick();
 			};
