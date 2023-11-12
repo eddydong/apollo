@@ -47,7 +47,8 @@ var midiToSeqXY=(sample)=>{
 // 	}
 	
 	function getInstrumentCode(n){
-		if (n<=7) return 1; //piano
+		const default_piano = 0;
+		if (n<=7) return default_piano; //piano
 		else if (n<=15) return 8; // music box etc.
 		else if (n<=23) return 12; // organ
 		else if (n==24) return 5; // nylon guitar
@@ -64,7 +65,7 @@ var midiToSeqXY=(sample)=>{
 		else if (n<=70) return 14; // bassoon etc
 		else if (n==71) return 15; // clarinet
 		else if (n<=79) return 11; // flute
-		else if (n<=111) return 1; // other stuff
+		else if (n<=111) return default_piano; // other stuff
 		return null;
 	}
 

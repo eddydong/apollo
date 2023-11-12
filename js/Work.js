@@ -32,7 +32,7 @@ Work.global= {
 	
 	bpm: 120,
 	
-	metronome: 1,
+	metronome: 0,
 
 	tempo_auto:[ // 0..seq.length/16 (resolution: 1 measure)
 	],
@@ -402,7 +402,7 @@ Work.layer= [  // T01..T10
 	{
 		name: "Layer 1",
 		
-		instrument: 1,
+		instrument: 0,
 		
 		mute: 0,
 		
@@ -430,7 +430,7 @@ Work.layer= [  // T01..T10
 	{
 		name: "Layer 2",
 		
-		instrument: 1,
+		instrument: 0,
 		
 		mute: 0,
 		
@@ -458,7 +458,7 @@ Work.layer= [  // T01..T10
 	{
 		name: "Layer 3",
 		
-		instrument: 1,
+		instrument: 0,
 		
 		mute: 0,
 		
@@ -486,7 +486,7 @@ Work.layer= [  // T01..T10
 	{
 		name: "Layer 4",
 		
-		instrument: 1,
+		instrument: 0,
 		
 		mute: 0,
 		
