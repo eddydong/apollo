@@ -4,7 +4,7 @@ var Instruments={};
 
 Instruments.sampler=[];
 
-const projectURL="https://motf.io/apollo"
+const projectURL="https://motf.io"
 //const projectURL="http://localhost"
 
 var samplerParams=[
