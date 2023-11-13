@@ -565,7 +565,7 @@ localStorage.clear();
 
 pianoroll.init(); 
 var work = JSB.train;
-
+var header = 0;
 for (var p=0; p<20; p++){
 	var rnd = Math.floor(Math.random()*work.length);
 	var piece = work[rnd];
@@ -579,7 +579,7 @@ for (var p=0; p<20; p++){
 			} else 
 			{
 				pianoroll.addNote({
-						x: 2 * i,
+						x: header + 2 * i,
 						y: piece[i][j]-21,
 						d: 2, 
 						s: 0, 
@@ -592,6 +592,7 @@ for (var p=0; p<20; p++){
 			}
 		}
 	}
+	header = pianroll.endMeas * 16;
 }
 
 pianoroll.autoZoom("xy");
