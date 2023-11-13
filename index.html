@@ -563,7 +563,9 @@ localStorage.clear();
 
 //{"x":0,"y":3,"d":64,"v":1,"l":0,"s":1,"t":0}
 
+Controls.showWaiting();
 pianoroll.init(); 
+
 var work = JSB.train;
 var header = 0;
 for (var p=0; p<10; p++){
@@ -593,8 +595,7 @@ for (var p=0; p<10; p++){
 		}
 	}
 	pianoroll.autoZoom("xy");
-	header = pianoroll.endMeas * 16;
-	console.log(header);
+	header = (pianoroll.endMeas + 1) * 16;
 }
 
 // const last = ['C4', 'E4', 'G4', 'B4'];

@@ -1312,7 +1312,6 @@ function init(){
 //		document.querySelector(".layer-name").click();
 		
 		// preload instrument for each layer
-		showWaiting();
 		for (var i=0; i<Work.layer.length; i++) {
 //			pianoroll.layer[i].instrument=Instruments.newSampler(Work.layer[i].instrument, i);
 			Instruments.assignInstrument(Work.layer[i].instrument, i);
@@ -1503,6 +1502,7 @@ function initFixedUI(){
 
 initFixedUI();
 init();
+
 //Tone.start();
 
 Controls.init=init;
