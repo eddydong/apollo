@@ -9,7 +9,7 @@ var smi = new SimpleMidiInput();
 if (navigator.requestMIDIAccess) 
 	navigator.requestMIDIAccess().then( onsuccesscallback, onerrorcallback );
 else {
-	console.log("Current browser does not support MIDI device. Please try Google Chrome.");
+	console.log("MIDI device only supported by Google Chrome");
 	return;
 }
 

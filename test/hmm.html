@@ -1,0 +1,57 @@
+<link rel="shortcut icon" type="image/x-icon" href="http://localhost/favicon.ico">
+<script src="hmm.js"></script>
+<script>
+
+  var HMM = HiddenMarkovModel();
+
+// test 1
+
+//   HMM.setInitialStateVector([0.6, 0.4]); // Healhy, Fever
+// 
+//   HMM.setTransitionMatrix([
+//       // Heathly, Fever
+//       [0.7, 0.3], // Healhy
+//       [0.4, 0.6]  // Fever
+//   ]);
+// 
+//   HMM.setEmissionMatrix([
+//       // Normal, Cold, Dizzy
+//       [0.5, 0.4, 0.1], // Healthy
+//       [0.1, 0.3, 0.6]  // Fever
+//   ]);
+// 
+//     // What is the probability that the given model is able generate the sequence of being Normal on day 1, Cold on day2, and Dizzy on day 3?
+//     var result = HMM.forward([0, 1, 2]); // Normal, Cold, Dizzy
+//     
+//     console.log(result);    
+
+
+
+// test 2
+
+	HMM.setInitialStateVector([0.25, 0.25, 0.25, 0.25]); // C G F Am
+
+	HMM.setTransitionMatrix([
+	  [0.2, 0.2, 0.3, 0.3], // C
+	  [0.5, 0.1, 0.1, 0.3], // G
+	  [0.3, 0.3, 0.3, 0.1], // F
+	  [0.1, 0.3, 0.4, 0.2]	// Am
+	]);
+
+	HMM.setEmissionMatrix([
+	  // Note 1-7, in C Major
+	  [0.4, 0.0, 0.1, 0.1, 0.3, 0.1, 0.0], 	// C
+	  [0.1, 0.3, 0.1, 0.0, 0.4, 0.0, 0.1], 	// G
+	  [0.3, 0.1, 0.0, 0.4, 0.0, 0.2, 0.0], 	// F
+	  [0.2, 0.0, 0.3, 0.1, 0.0, 0.4, 0.0] 	// Am
+	]);
+
+    var res = HMM.forward([4,1,4,1,0,3,4,0]).table; 
+
+    var code=[];
+    for (var i=0; i<res.length; i++) code.push(res[i].indexOf(Math.max(...res[i])));
+    
+    console.log(code);    
+
+
+</script>

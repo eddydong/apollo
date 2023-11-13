@@ -4,8 +4,7 @@ var Instruments={};
 
 Instruments.sampler=[];
 
-const projectURL="https://motf.io"
-//const projectURL="http://localhost"
+const projectURL = SERVER;
 
 var samplerParams=[
 	{//0

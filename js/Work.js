@@ -426,7 +426,35 @@ Work.layer= [  // T01..T10
 		
 		imp_a:[ // 0..seq.length/8 (resolution: 16n x 8 = 2n, or 1/2 measure)
 		]
-	}
+	},
+	{
+		name: "Layer 1",
+		
+		instrument: 0,
+		
+		mute: 0,
+		
+		solo: 0,
+		
+		volume: -12,
+		
+		pan: 0,
+		
+		seq: [],
+
+		rhythm: [
+		[1/8,1/16,1/16,1/8,1/8,1/16,1/8,1/16,1/8,1/8],
+		[1/8,1/16,1/16,1/8,1/8,1/16,1/8,1/16,1/4],
+		[1/8,1/16,1/16,1/8,1/8,1/16,1/8,1/16,1/8,1/8],
+		[1/8,1/16,1/16,1/8,1/16,1/16,1/8,1/16,1/16,1/16,1/16,1/16,1/16]
+		],
+		
+		vel_a:[ // 0..seq.length
+		],
+		
+		imp_a:[ // 0..seq.length/8 (resolution: 16n x 8 = 2n, or 1/2 measure)
+		]
+	}	
 ]
 
 // init layer[0].imp_a with default iparams

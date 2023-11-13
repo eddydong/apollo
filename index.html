@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -7,9 +8,7 @@
     <title>motf pianoroll</title>
     <link rel="stylesheet" type="text/css" href="css/editor.css" />
 
-<link rel="shortcut icon" type="image/x-icon" href="https://motf.io/favicon.ico">
-
-<!-- <link rel="shortcut icon" type="image/x-icon" href="http://localhost/favicon.ico"> -->
+<link rel="shortcut icon" type="image/x-icon" href="http://motf.io/favicon.ico">
 
 </head>
 
@@ -526,17 +525,23 @@
 <div id="mask"></div>
 <div id="splash_text" class="center-text">LOADING INSTRUMENTS</div>
 
+<button id="vbtn" style="display:none;"></button>
 </body>
 </html>
 
 <!-- <script src="./js/pako.min.js"></script> -->
+<script> 
+	SERVER = "https://motf.io";
+//	SERVER = "http://localhost";
+</script>
+
 <script src="./js/Tone.js"></script>
 <script src="./js/tonal.min.js"></script>
 <script src="./js/Mcommons.js"></script>
 <script src="./js/Theory.js"></script>
 <script src="./js/Chord.js"></script>
 <script src="./js/myUI.js"></script>
-<script src="./js/Midi.js"></script>
+<script src="./js/midi.js"></script>
 <script src="./js/Global.js"></script>
 <script src="./js/Work.js"></script>
 <script src="./js/Importer.js"></script>
@@ -550,7 +555,8 @@
 <script src="./js/MidiController.js"></script>
 <!-- <script src="./js/JSB/jsb-chorales-quarter.js"></script> -->
 <script src="./js/JSB/jsb-chorales-8th.js"></script>
-<script type="module">
+<!-- <script type="module"> -->
+<script>
 
 //console.clear();
 localStorage.clear();
@@ -577,7 +583,7 @@ for (var i=0; i<piece.length; i++) {
 					d: 2, 
 					s: 0, 
 					v: 1, 
-					l: 0, //j,
+					l: j % 2, //j,
 					t: 1 // type: 0: normal note; 1: just improvised			
 			});
 			prev_notes[j] = Work.global.seqXY[Work.global.seqXY.length-1];
@@ -588,8 +594,7 @@ for (var i=0; i<piece.length; i++) {
 
 pianoroll.autoZoom("xy");
 
-Controls.showWaiting();
-Controls.init();
+
 
 // const last = ['C4', 'E4', 'G4', 'B4'];
 // console.log(Tonal);

@@ -60,6 +60,9 @@ vKeyboard.onkeydown=onkeydown;
 vKeyboard.onkeyup=onkeyup;
 }())
 
+
+
+
 var Controls= {};
 
 (function(){
@@ -71,7 +74,7 @@ var Controls= {};
 	var isWritingPreset=0;
 
 	window.onkeydown=function(e){
-
+		
  		if (document.activeElement.id=="input_rhythm" ||
  			document.activeElement.id=="input_bpm" ||
  			document.activeElement.id=="input_layer_name" ||
@@ -1308,13 +1311,12 @@ function init(){
 //		document.querySelector(".layer-name").click();
 		
 		// preload instrument for each layer
-
+		showWaiting();
 		for (var i=0; i<Work.layer.length; i++) {
 //			pianoroll.layer[i].instrument=Instruments.newSampler(Work.layer[i].instrument, i);
 			Instruments.assignInstrument(Work.layer[i].instrument, i);
 			pianoroll.layer[i].channel.volume.value=Work.layer[i].volume;
 			pianoroll.layer[i].channel.pan.value=Work.layer[i].pan;
-			console.log("pre-loading: adding instrument for layer "+i);
 		};
 
 		for (var i=0; i<sis.length; i++) {
@@ -1386,8 +1388,8 @@ function hideWaiting(){
 	document.getElementById("mask").style.display="none";
 	document.getElementById("splash_text").style.display="none";
 
-	const vbtn = document.getElementById("btn_play");
-
+	const vbtn = document.getElementById("vbtn");
+	vbtn.addEventListener('click', async function(){ await Tone.start(); })
 	function simClick(){
 		const event = new MouseEvent('click', {
 			view: window,
@@ -1395,7 +1397,8 @@ function hideWaiting(){
 			cancelable: true
 		});
 		vbtn.dispatchEvent(event);	
-	}	
+	};
+	simClick();
 }
 
 // fullscreen on/off only works upon user interaction
@@ -1497,8 +1500,7 @@ function initFixedUI(){
 //	s.options.selectedIndex=70;
 };
 
-// initFixedUI();
-// showWaiting();
+initFixedUI();
 init();
 //Tone.start();
 
@@ -1509,3 +1511,4 @@ Controls.hideWaiting=hideWaiting;
 }());
 
 var canvas=new Canvas();
+
