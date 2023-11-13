@@ -816,6 +816,7 @@ var Controls= {};
 	};
 	
 	document.getElementById("btn_play").onclick=()=>{ 
+		if (Tone.context.state!="running") await Tone.start();	
 		pianoroll.play(); 
 		var c;
 		if (pianoroll.isPlaying) c="#bb33bb"; else c="#666666";
