@@ -565,29 +565,31 @@ localStorage.clear();
 
 pianoroll.init(); 
 var work = JSB.train;
-var rnd = Math.floor(Math.random()*work.length);
-// rnd=11;
-var piece = work[rnd];
-console.log("Piece No.: "+rnd)
-var prev_keys = [0,0,0,0];
-var prev_notes = [];
-for (var i=0; i<piece.length; i++) { 
-	for (var j=0; j<piece[i].length; j++) {
-		if (prev_keys[j]==piece[i][j]) {
-			prev_notes[j].d+=2;		
-		} else 
-		{
-			pianoroll.addNote({
-					x: 2 * i,
-					y: piece[i][j]-21,
-					d: 2, 
-					s: 0, 
-					v: 1, 
-					l: j % 2, //j,
-					t: 1 // type: 0: normal note; 1: just improvised			
-			});
-			prev_notes[j] = Work.global.seqXY[Work.global.seqXY.length-1];
-			prev_keys[j] = piece[i][j];
+
+for (var p=0; p<20; p++){
+	var rnd = Math.floor(Math.random()*work.length);
+	var piece = work[rnd];
+	console.log("Piece No.: "+rnd)
+	var prev_keys = [0,0,0,0];
+	var prev_notes = [];
+	for (var i=0; i<piece.length; i++) { 
+		for (var j=0; j<piece[i].length; j++) {
+			if (prev_keys[j]==piece[i][j]) {
+				prev_notes[j].d+=2;		
+			} else 
+			{
+				pianoroll.addNote({
+						x: 2 * i,
+						y: piece[i][j]-21,
+						d: 2, 
+						s: 0, 
+						v: 1, 
+						l: j % 2, //j,
+						t: 1 // type: 0: normal note; 1: just improvised			
+				});
+				prev_notes[j] = Work.global.seqXY[Work.global.seqXY.length-1];
+				prev_keys[j] = piece[i][j];
+			}
 		}
 	}
 }
