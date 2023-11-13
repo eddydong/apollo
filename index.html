@@ -566,7 +566,7 @@ localStorage.clear();
 pianoroll.init(); 
 var work = JSB.train;
 var header = 0;
-for (var p=0; p<20; p++){
+for (var p=0; p<10; p++){
 	var rnd = Math.floor(Math.random()*work.length);
 	var piece = work[rnd];
 	console.log("Piece No.: "+rnd)
@@ -592,12 +592,10 @@ for (var p=0; p<20; p++){
 			}
 		}
 	}
-	header = pianroll.endMeas * 16;
+	pianoroll.autoZoom("xy");
+	header = pianoroll.endMeas * 16;
+	console.log(header);
 }
-
-pianoroll.autoZoom("xy");
-
-
 
 // const last = ['C4', 'E4', 'G4', 'B4'];
 // console.log(Tonal);
