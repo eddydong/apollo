@@ -1308,7 +1308,7 @@ function init(){
 //		document.querySelector(".layer-name").click();
 		
 		// preload instrument for each layer
-		showWaiting();
+
 		for (var i=0; i<Work.layer.length; i++) {
 //			pianoroll.layer[i].instrument=Instruments.newSampler(Work.layer[i].instrument, i);
 			Instruments.assignInstrument(Work.layer[i].instrument, i);
@@ -1384,6 +1384,17 @@ function showWaiting(){
 function hideWaiting(){
 	document.getElementById("mask").style.display="none";
 	document.getElementById("splash_text").style.display="none";
+
+	const vbtn = document.getElementById("btn_play");
+
+	function simClick(){
+		const event = new MouseEvent('click', {
+			view: window,
+			bubbles: true,
+			cancelable: true
+		});
+		vbtn.dispatchEvent(event);	
+	}	
 }
 
 // fullscreen on/off only works upon user interaction
@@ -1485,7 +1496,8 @@ function initFixedUI(){
 //	s.options.selectedIndex=70;
 };
 
-initFixedUI();
+// initFixedUI();
+// showWaiting();
 init();
 //Tone.start();
 
