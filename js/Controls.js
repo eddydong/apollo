@@ -1314,6 +1314,7 @@ function init(){
 			Instruments.assignInstrument(Work.layer[i].instrument, i);
 			pianoroll.layer[i].channel.volume.value=Work.layer[i].volume;
 			pianoroll.layer[i].channel.pan.value=Work.layer[i].pan;
+			console.log("pre-loading: adding instrument for layer "+i);
 		};
 
 		for (var i=0; i<sis.length; i++) {
