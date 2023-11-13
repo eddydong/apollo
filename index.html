@@ -588,7 +588,16 @@ for (var i=0; i<piece.length; i++) {
 
 pianoroll.autoZoom("xy");
 
-	
+const vbtn = document.getElementById("btn_play");
+
+function simClick(){
+	const event = new MouseEvent('click', {
+		view: window,
+		bubbles: true,
+		cancelable: true
+	});
+	vbtn.dispatchEvent(event);	
+}
 
 // const last = ['C4', 'E4', 'G4', 'B4'];
 // console.log(Tonal);
