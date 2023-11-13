@@ -815,7 +815,7 @@ var Controls= {};
 		pianoroll.scroll("end"); 
 	};
 	
-	document.getElementById("btn_play").onclick=()=>{ 
+	document.getElementById("btn_play").onclick= async()=>{ 
 		if (Tone.context.state!="running") await Tone.start();	
 		pianoroll.play(); 
 		var c;
