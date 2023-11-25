@@ -82,7 +82,7 @@ var midiToSeqXY=(sample)=>{
 	
 		for (var j=0; j<sample.tracks[i].notes.length; j++)
 		if (sample.tracks[i].notes[j].midi-21<88 && sample.tracks[i].notes[j].midi-21>=0)
-			song.notes.push({
+		{	song.notes.push({
 				y: sample.tracks[i].notes[j].midi - 21, 
 				x: sample.tracks[i].notes[j].time / tickL, 
 				d: sample.tracks[i].notes[j].duration / tickL, 
@@ -90,6 +90,8 @@ var midiToSeqXY=(sample)=>{
 				l: ch, 
 				s: 0
 			});
+//			console.log(sample.tracks[i].notes[j].velocity);
+		}
 	};
 		
 	Work.global.seqXY=song.notes;
@@ -114,10 +116,11 @@ function parseFile(file) {
 		pianoroll.playhead=-1;	
 		Composer.init();
 		Controls.init();	
+ 	pianoroll.minW= Work.global.bpMeas * 2 * (16 / Work.global.bpNote)+1;
+ 	pianoroll.maxW= Work.global.bpMeas * 16 * (16 / Work.global.bpNote)+1;
 		pianoroll.autoZoom();
 		pianoroll.updateChords();	
 		pianoroll.detectKeyScale();
-
 		pianoroll.scroll("beginning");
 	};
 	reader.readAsArrayBuffer(file);

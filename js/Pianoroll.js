@@ -7,7 +7,7 @@ function Pianoroll(){
 	this.width = this.canvas.width;
 	this.height = this.canvas.height;
  	this.minW= Work.global.bpMeas * 2 * (16 / Work.global.bpNote)+1;
- 	this.maxW= Work.global.bpMeas * 32 * (16 / Work.global.bpNote)+1;
+ 	this.maxW= Work.global.bpMeas * 16 * (16 / Work.global.bpNote)+1;
 	this.viewportL = 0;  // left most column position in timeline
 	this.viewportW = this.maxW; // number of columns / 8n's
 	this.viewportH = vH(); // height of viewport in rows (key's)
