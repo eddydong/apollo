@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: myFont;
-  src: url(Xolonium.ttf);
+  src: url(Xolonium.ttf),local("Helvetica Neue Bold"), local("HelveticaNeue-Bold");
 }
 
 * {
