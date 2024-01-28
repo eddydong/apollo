@@ -5,7 +5,7 @@ const keymapScaled=[81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 219, 221, // q to ]
      			    
 const keymapChroma=[81,50,87,51,69,  82,53,84,54,89,55,85, 73,57,79,48,80, 219,187,221];
 
-const keyLag = -0.6;
+const keyLag=0;
 
 var keyMap=Array(88).fill(0);
 
@@ -13,9 +13,9 @@ function startNote(k){
 	if (keyMap[k]!=0) return;
 	if (pianoroll.layer[Work.global.layer_sel].instrument) {
 		var	t = Tone.now() + pianoroll.layer[Work.global.layer_sel].instrument.timeOffset;
-		keyMap[k] = Tone.now();
 		pianoroll.layer[Work.global.layer_sel].instrument.triggerAttack( 
 			Global.chromatic_scale[k], t, 1);
+		keyMap[k] = Tone.now();
 	};
 };
 
@@ -23,25 +23,19 @@ function stopNote(k){
 	if (pianoroll.layer[Work.global.layer_sel].instrument) {
 		pianoroll.layer[Work.global.layer_sel].instrument
 			.triggerRelease(Global.chromatic_scale[k], Tone.now());
-
-		if (keyMap[k]!=0 && pianoroll.isPlaying && pianoroll.recording){
-			var xxx=pianoroll.playStart + (keyMap[k]-pianoroll.playingFromT)/Tone.Time("16n") + keyLag;
-			if (xxx>=0){
-				pianoroll.addNote({
-					x: xxx,
-					y: k,
-					d: (Tone.now()-keyMap[k]+0.1)/Tone.Time("16n"),
-					l: Work.global.layer_sel,
-					v: 1,
-					s: 0,
-					t: 0
-				});
-			};
-
-			keyMap[k]=0;
-	};
-};
-};
+		if (keyMap[k]!=0 && pianoroll.isPlaying && pianoroll.recording)
+			pianoroll.addNote({
+				x: pianoroll.playStart + (keyMap[k]-pianoroll.playingFromT)/Tone.Time("16n") + keyLag,
+				y: k,
+				d: (Tone.now()-keyMap[k])/Tone.Time("16n"),
+				l: Work.global.layer_sel,
+				v: 1,
+				s: 0,
+				t: 0
+			});
+		keyMap[k]=0;
+	}
+}
 
 function onkeydown(e){
 	// octave shift
@@ -65,6 +59,9 @@ function onkeyup(e){
 vKeyboard.onkeydown=onkeydown;
 vKeyboard.onkeyup=onkeyup;
 }())
+
+
+
 
 var Controls= {};
 
@@ -592,7 +589,7 @@ var Controls= {};
 	// local .mid file loader
 	var fileloader2 = document.body.appendChild(document.createElement("input"));
 	fileloader2.type = "file";
-	fileloader2.accept = ".mid";
+	fileloader2.accept = ".mid, .midi";
 	fileloader2.style.display ="none";
 	fileloader2.onchange=(e)=>{
 		var file = e.target.files[0];
@@ -818,7 +815,8 @@ var Controls= {};
 		pianoroll.scroll("end"); 
 	};
 	
-	document.getElementById("btn_play").onclick=()=>{ 
+	document.getElementById("btn_play").onclick= async()=>{ 
+		if (Tone.context.state!="running") await Tone.start();	
 		pianoroll.play(); 
 		var c;
 		if (pianoroll.isPlaying) c="#bb33bb"; else c="#666666";
@@ -1314,7 +1312,6 @@ function init(){
 //		document.querySelector(".layer-name").click();
 		
 		// preload instrument for each layer
-		showWaiting();
 		for (var i=0; i<Work.layer.length; i++) {
 //			pianoroll.layer[i].instrument=Instruments.newSampler(Work.layer[i].instrument, i);
 			Instruments.assignInstrument(Work.layer[i].instrument, i);
@@ -1390,6 +1387,18 @@ function showWaiting(){
 function hideWaiting(){
 	document.getElementById("mask").style.display="none";
 	document.getElementById("splash_text").style.display="none";
+
+	const vbtn = document.getElementById("vbtn");
+	vbtn.addEventListener('click', async function(){ await Tone.start(); })
+	function simClick(){
+		const event = new MouseEvent('click', {
+			view: window,
+			bubbles: true,
+			cancelable: true
+		});
+		vbtn.dispatchEvent(event);	
+	};
+	simClick();
 }
 
 // fullscreen on/off only works upon user interaction
@@ -1493,6 +1502,7 @@ function initFixedUI(){
 
 initFixedUI();
 init();
+
 //Tone.start();
 
 Controls.init=init;
@@ -1502,3 +1512,4 @@ Controls.hideWaiting=hideWaiting;
 }());
 
 var canvas=new Canvas();
+

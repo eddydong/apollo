@@ -920,11 +920,14 @@ Pianoroll.prototype.drawPianoRoll=function(){
 		this.ctx.fillText("M" + (Math.floor(i/tickPerMeas)+1), 
 			(i+1-this.viewportL)*w, 25);
 
+// Draw Chord Signs
 		this.ctx.font = "bold 16px myFont";
 		this.ctx.fillStyle = "rgba(120,255,255,0.7)";
 		var chs=this.chord[Math.floor(i / tickPerMeas)];
 		if (chs!=undefined && chs.length>0)
-		for (var j=0; j<chs.length; j++) {
+//		for (var j=0; j<chs.length; j++) 
+		for (var j=0; j<1; j++) 
+		{
 			var ch=this.chord[Math.floor(i / tickPerMeas)][j];
 //			if (ch.length>6) ch=ch.substring(0,6)+"...";
 			this.ctx.fillText(ch,(i+1-this.viewportL)*w, 50+j*25);	
@@ -1340,7 +1343,9 @@ Pianoroll.prototype.drawScaledPianoRoll=function(){
 		this.ctx.fillStyle = "rgba(120,255,255,0.7)";
 		var chs=this.chord[Math.floor(i / tickPerMeas)];
 		if (chs!=undefined && chs.length>0)
-		for (var j=0; j<chs.length; j++) {
+//		for (var j=0; j<chs.length; j++) 
+		for (var j=0; j<1; j++) 
+		{
 			var ch=this.chord[Math.floor(i / tickPerMeas)][j];
 //			if (ch.length>6) ch=ch.substring(0,6)+"...";
 			this.ctx.fillText(ch,(i+1-this.viewportL)*w, 50+j*25);	

@@ -144,11 +144,13 @@ Global.XYtoIJ=()=>{
 // 	var seqTT= seqL / tickL; // len in total tick
 
 	var seqTT= (seqL % 1 == 0 ? seqL : Math.floor(seqL)+1);
-	
+
 	for (var i=0; i<seqTT; i++)
 		res.push({notes:[], sel:0});
 
-	for (var i=0; i<n_notes; i++)
+
+	for (var i=0; i<n_notes; i++){
+	
 	res[Math.floor(Work.global.seqXY[i].x)].notes.push({
 		note: Work.global.seqXY[i].y,
 		len: Work.global.seqXY[i].d,
@@ -157,7 +159,7 @@ Global.XYtoIJ=()=>{
 		layer: Work.global.seqXY[i].l,
 		sel: Work.global.seqXY[i].s,				
 		type: Work.global.seqXY[i].t
-	});
+	})};
 	
 	// push in rhythm notes
 	// this is something seqXY never have - just dynamically generated, inserted into seqIJ and played

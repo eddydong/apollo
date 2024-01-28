@@ -559,44 +559,44 @@
 <script>
 
 //console.clear();
-localStorage.clear();
+//localStorage.clear();
 
 //{"x":0,"y":3,"d":64,"v":1,"l":0,"s":1,"t":0}
 
 Controls.showWaiting();
 pianoroll.init(); 
 
-var work = JSB.train;
-var header = 0;
-for (var p=0; p<10; p++){
-	var rnd = Math.floor(Math.random()*work.length);
-	var piece = work[rnd];
-	console.log("Piece No.: "+rnd)
-	var prev_keys = [0,0,0,0];
-	var prev_notes = [];
-	for (var i=0; i<piece.length; i++) { 
-		for (var j=0; j<piece[i].length; j++) {
-			if (prev_keys[j]==piece[i][j]) {
-				prev_notes[j].d+=2;		
-			} else 
-			{
-				pianoroll.addNote({
-						x: header + 2 * i,
-						y: piece[i][j]-21,
-						d: 2, 
-						s: 0, 
-						v: 1, 
-						l: j % 2, //j,
-						t: 1 // type: 0: normal note; 1: just improvised			
-				});
-				prev_notes[j] = Work.global.seqXY[Work.global.seqXY.length-1];
-				prev_keys[j] = piece[i][j];
-			}
-		}
-	}
-	pianoroll.autoZoom("xy");
-	header = (pianoroll.endMeas + 2) * 16;
-}
+// var work = JSB.train;
+// var header = 0;
+// for (var p=0; p<10; p++){
+// 	var rnd = Math.floor(Math.random()*work.length);
+// 	var piece = work[rnd];
+// 	console.log("Piece No.: "+rnd)
+// 	var prev_keys = [0,0,0,0];
+// 	var prev_notes = [];
+// 	for (var i=0; i<piece.length; i++) { 
+// 		for (var j=0; j<piece[i].length; j++) {
+// 			if (prev_keys[j]==piece[i][j]) {
+// 				prev_notes[j].d+=2;		
+// 			} else 
+// 			{
+// 				pianoroll.addNote({
+// 						x: header + 2 * i,
+// 						y: piece[i][j]-21,
+// 						d: 2, 
+// 						s: 0, 
+// 						v: 1, 
+// 						l: j % 2, //j,
+// 						t: 1 // type: 0: normal note; 1: just improvised			
+// 				});
+// 				prev_notes[j] = Work.global.seqXY[Work.global.seqXY.length-1];
+// 				prev_keys[j] = piece[i][j];
+// 			}
+// 		}
+// 	}
+// 	pianoroll.autoZoom("xy");
+// 	header = (pianoroll.endMeas + 2) * 16;
+// }
 
 // const last = ['C4', 'E4', 'G4', 'B4'];
 // console.log(Tonal);
