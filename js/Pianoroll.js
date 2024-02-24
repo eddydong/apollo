@@ -583,7 +583,7 @@ Pianoroll.prototype.merge=function(){
 		d: d,
 		l: Work.global.layer_sel,
 		s: 1,
-		v: 3
+		v: 1
 	});
 
 	this.updateEndTick();
@@ -1698,7 +1698,7 @@ Pianoroll.prototype.adjustVel=function(a){
 	for (var i=0; i<ns.length; i++) {
 		Work.global.seqXY[ns[i]].v=Work.global.seqXY[ns[i]].v*(1+a*0.01);
 		if (Work.global.seqXY[ns[i]].v<0.05) Work.global.seqXY[ns[i]].v=0.05;
-		if (Work.global.seqXY[ns[i]].v> 1) Work.global.seqXY[ns[i]].v= 1;
+		if (Work.global.seqXY[ns[i]].v> 3) Work.global.seqXY[ns[i]].v= 3;
 	};
 	Controls.saveTemp();		
 }

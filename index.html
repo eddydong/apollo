@@ -41,10 +41,12 @@
 <div class="dropdown">
   <span>Project</span>
   <div class="dropdown-content">
-	<button id="btn_open" title="Command+O">Open Local motf Project</button>
-	<button id="btn_import" title="Command+I">Import Local MIDI File</button>
+	<button id="btn_import" title="Command+I">Import MIDI File</button>
+	<button id="btn_export" title="Command+E">Export MIDI File</button>
+	<span>|</span>
+	<button id="btn_open" title="Command+O">Open motf Project</button>
 	<br>
-	<button id="btn_save" title="Command+S">Save To File</button>
+	<button id="btn_save" title="Command+S">Save motf Project</button>
 	<span>
 	Work Name:
 	<input id="input_workname" maxlength=22 type="text" style="width:220px;" value="Another Piece of Shit" />
@@ -536,20 +538,22 @@
 </script>
 
 <script src="./js/Tone.js"></script>
+<!-- <script src="../apollo1/js1/mylib.js"></script> -->
 <script src="./js/tonal.min.js"></script>
 <script src="./js/Mcommons.js"></script>
 <script src="./js/Theory.js"></script>
 <script src="./js/Chord.js"></script>
-<script src="./js/myUI.js"></script>
 <script src="./js/midiFileReader.js"></script>
 <script src="./js/Global.js"></script>
 <script src="./js/Work.js"></script>
 <script src="./js/Importer.js"></script>
-<script src="./js/Composer.js"></script>
+<script src="./js/Composer0.js"></script>
+<!-- <script src="../apollo1/js1/Improviser.js"></script> -->
 <script src="./js/Pianoroll.js"></script>
 <script src="./js/Canvas.js"></script>
 <script src="./js/Navbar.js"></script>
 <script src="./js/Instruments.js"></script>
+<script src="./js/vPiano.js"></script>
 <script src="./js/Controls.js"></script>
 <script src="./js/SimpleMidiInput.js"></script>
 <script src="./js/MidiController.js"></script>
@@ -558,45 +562,48 @@
 <!-- <script type="module"> -->
 <script>
 
-//console.clear();
-//localStorage.clear();
+console.clear();
+localStorage.clear();
 
 //{"x":0,"y":3,"d":64,"v":1,"l":0,"s":1,"t":0}
 
 Controls.showWaiting();
 pianoroll.init(); 
 
-// var work = JSB.train;
-// var header = 0;
-// for (var p=0; p<10; p++){
-// 	var rnd = Math.floor(Math.random()*work.length);
-// 	var piece = work[rnd];
-// 	console.log("Piece No.: "+rnd)
-// 	var prev_keys = [0,0,0,0];
-// 	var prev_notes = [];
-// 	for (var i=0; i<piece.length; i++) { 
-// 		for (var j=0; j<piece[i].length; j++) {
-// 			if (prev_keys[j]==piece[i][j]) {
-// 				prev_notes[j].d+=2;		
-// 			} else 
-// 			{
-// 				pianoroll.addNote({
-// 						x: header + 2 * i,
-// 						y: piece[i][j]-21,
-// 						d: 2, 
-// 						s: 0, 
-// 						v: 1, 
-// 						l: j % 2, //j,
-// 						t: 1 // type: 0: normal note; 1: just improvised			
-// 				});
-// 				prev_notes[j] = Work.global.seqXY[Work.global.seqXY.length-1];
-// 				prev_keys[j] = piece[i][j];
-// 			}
-// 		}
-// 	}
-// 	pianoroll.autoZoom("xy");
-// 	header = (pianoroll.endMeas + 2) * 16;
-// }
+var work = JSB.train;
+var header = 0;
+for (var p=0; p<10; p++){
+	var rnd = Math.floor(Math.random()*work.length);
+	var piece = work[rnd];
+	console.log("Piece No.: "+rnd)
+	var prev_keys = [0,0,0,0];
+	var prev_notes = [];
+	for (var i=0; i<piece.length; i++) { 
+		for (var j=0; j<piece[i].length; j++) {
+			if (prev_keys[j]==piece[i][j]) {
+				prev_notes[j].d+=2;		
+			} else 
+			{
+				pianoroll.addNote({
+						x: header + 2 * i,
+						y: piece[i][j]-21,
+						d: 2, 
+						s: 0, 
+						v: 1, 
+						l: j % 2, //j,
+						t: 1 // type: 0: normal note; 1: just improvised			
+				});
+				prev_notes[j] = Work.global.seqXY[Work.global.seqXY.length-1];
+				prev_keys[j] = piece[i][j];
+			}
+		}
+	}
+	pianoroll.autoZoom("xy");
+	header = (pianoroll.endMeas + 2) * 16;
+}
+
+
+
 
 // const last = ['C4', 'E4', 'G4', 'B4'];
 // console.log(Tonal);

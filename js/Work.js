@@ -30,7 +30,7 @@ Work.global= {
 	
 	magnet: 0,
 	
-	bpm: 108,
+	bpm: 120,
 	
 	metronome: 0,
 

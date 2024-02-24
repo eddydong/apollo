@@ -126,7 +126,48 @@ function parseFile(file) {
 	reader.readAsArrayBuffer(file);
 }
 
-Importer.parseFile=parseFile;
+function exportMidi(work){	
+	var midi = new Midi();
+// 	midi.header.keySignatures.push({
+// 		key: "C",
+// 		scale: "major",
+// 		ticks: 0
+// 	});
+// 	midi.header.tempos.push({
+// 		bpm: work.global.bpm,
+// 		ticks: 0,
+// 		time: 0
+// 	})
+// 	midi.header.timeSignatures.push({
+// 		measures: 0,
+// 		ticks: 0,
+// 		timeSignature: [2, work.global.bpNote]
+// 	})
+	secondPerTick = 60 / work.global.bpm / 4;
+	work.global.seqXY.forEach((note)=>{
+		if ((note.l+1) > midi.tracks.length)
+			track = midi.addTrack();
+		midi.tracks[note.l].addNote({
+			midi : note.y + 21, // 21-108, 60 = middle C
+			time : note.x * secondPerTick,  
+			duration: note.d * secondPerTick, 
+			velocity: note.v // 0~1
+		});
+	});
+	console.log(midi);
+	const blob = new Blob([midi.toArray()], { type: 'application/octet-stream' });
+	const a = document.createElement('a');
+	document.body.appendChild(a);
+	a.href = window.URL.createObjectURL(blob);
+	a.download = 'test2.mid';
+	a.click();
+	window.URL.revokeObjectURL(a.href);
+	document.body.removeChild(a);
+};
+
+
+Importer.parseFile = parseFile;
+Importer.exportMidi = exportMidi;
 
 }())
 
